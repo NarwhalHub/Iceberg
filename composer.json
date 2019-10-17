@@ -1,0 +1,21 @@
+{
+    "name": "puleeno/wp-manads",
+    "description": "The flexible ads manager for WordPress",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Puleeno Nguyen",
+            "email": "puleeno@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        },
+        "files": [
+            "src/helpers/functions.php"
+        ]
+    }
+}
