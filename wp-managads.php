@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WP Manads
+ * Plugin Name: WP Managads
  * Plugin URI: https://puleeno.com
  * Author: Puleeno Nguyen
  * Author URI: https://puleeno.com
@@ -9,5 +9,5 @@
  * Tag: ads, manager, performance
  */
 
-define('WP_MANADS_PLUGIN_FILE', __FILE__);
+define('WP_Managads_PLUGIN_FILE', __FILE__);
 
