@@ -4,6 +4,9 @@ namespace Managads;
 
 class Ad
 {
+    protected $loaded = false;
+    protected $isExists = false;
+
     public $id, $name, $type, $data, $description, $category_id = null;
 
     public function __construct($id)
@@ -22,16 +25,30 @@ class Ad
         return $this->id;
     }
 
+    public function isExists()
+    {
+        return $this->isExists !== false;
+    }
+
     public function getAdFromDb()
     {
         global $managads_query;
         try {
             $ad = $managads_query->getAd($this->id);
+            /**
+             * Make the flag is loaded ad from the database.
+             */
+            $this->loaded = true;
 
             // If the ad is not exists stop this process.
             if (!$ad) {
                 return;
             }
+
+            /**
+             * Make the flag to check the ad is exists in the database
+             */
+            $this->isExists = true;
 
             $dbMapToObject = array(
                 'ID' => 'id',
@@ -69,6 +86,7 @@ class Ad
             return $pre;
         }
 
+        $content = '';
         if ($this->type === 'html') {
             $content = $this->getData();
         }
