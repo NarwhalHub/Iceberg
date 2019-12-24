@@ -1,5 +1,7 @@
 <?php
-namespace Mangads\Shortcodes;
+namespace Managads\Shortcodes;
+
+use Managads\Ad;
 
 class Managads
 {
@@ -15,5 +17,11 @@ class Managads
 
     public function shortcode($attrs)
     {
+        $attrs = shortcode_atts(array(
+            'id' => 0,
+        ), $attrs);
+        $ad = new Ad($attrs['id']);
+
+        return $ad->getContent();
     }
 }

@@ -1,7 +1,8 @@
 <?php
 use Managads\Admin\Admin as ManagadsAdmin;
 use Managads\Installer as ManagadsInstaller;
-use Managads\Shortcodes\Managads as ManagadsShortCodes;
+use Managads\Shortcodes\Managads as ManagadsShortcode;
+use Managads\Query as ManagadsQuery;
 
 class Managads
 {
@@ -43,7 +44,7 @@ class Managads
 
     public function includes()
     {
-        $GLOBALS['managads_query'] = new Query();
+        $GLOBALS['managads_query'] = new ManagadsQuery();
         if ($this->is_request('admin')) {
             $this->admin = new ManagadsAdmin();
         }
@@ -51,7 +52,7 @@ class Managads
         /**
          * Register Shortcodes
          */
-        new ManagadsShortCodes();
+        new ManagadsShortcode();
     }
 
     public function initHooks()

@@ -3,7 +3,7 @@ namespace Managads;
 
 class Query
 {
-    public function getAd($adId)
+    public function getAd($adId, $returnType = 'ARRAY_A')
     {
         $pre = apply_filters('managads_pre_get_ad', null, $adId);
         if ($pre) {
@@ -11,11 +11,11 @@ class Query
         }
 
         global $wpdb;
-        $sql = "SELECT * FROM {$wpdb->prefix}managads_ads WHERE ID=?";
+        $sql = "SELECT * FROM {$wpdb->prefix}managads_ads WHERE ID=%d";
         $ad = $wpdb->get_row($wpdb->prepare(
             $sql,
-            $adId
-        ));
+            $adId,
+        ), $returnType);
         return apply_filters('managads_get_ad', $ad, $adId);
     }
 
