@@ -6,7 +6,7 @@ class Query
     public function getAd($adId, $returnType = 'ARRAY_A')
     {
         $pre = apply_filters('managads_pre_get_ad', null, $adId);
-        if ($pre) {
+        if ($pre !== null) {
             return $pre;
         }
 
@@ -24,5 +24,21 @@ class Query
         global $wpdb;
         $sql = "SELECT * FROM {$wpdb->prefix}managads_ads";
         return $wpdb->get_results($sql);
+    }
+
+    public function getAdMeta($adId, $metaKey)
+    {
+        $pre = apply_filters('managads_pre_get_ad_meta', null, $adId, $metaKey);
+        if ($pre !== null) {
+            return $pre;
+        }
+        global $wpdb;
+        $sql = $wpdb->prepare(
+            "SELECT * FROM {$wpdb->prefix}managads_ad_metas WHERE ad_id=%d AND meta_key=%s",
+            $adId,
+            $metaKey
+        );
+
+        return $wpdb->get_row($sql);
     }
 }

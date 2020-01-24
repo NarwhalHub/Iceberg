@@ -82,7 +82,7 @@ class Ad
     public function getContent()
     {
         $pre = apply_filters('managads_pre_ad_content', null, $this);
-        if ($pre) {
+        if ($pre !== null) {
             return $pre;
         }
 
@@ -92,5 +92,19 @@ class Ad
         }
 
         return apply_filters('managads_ad_content', $content, $this);
+    }
+
+    public function getMeta($metaKey, $defaultValue = false)
+    {
+        global $managads_query;
+        $meta = $managads_query->getAdMeta($this->id, $metaKey);
+        if ($meta === null) {
+            return apply_filters('managads_ad_meta_value', $defaultValue);
+        }
+
+        return apply_filters(
+            'managads_ad_meta_value',
+            maybe_unserialize($meta->meta_value)
+        );
     }
 }
