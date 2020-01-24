@@ -22,7 +22,11 @@ class Managads_Ads_Txt_Rewrite {
 	public function load_content( $template ) {
 		global $wp_query;
 		if ( isset( $wp_query->query_vars['action'] ) && 'ads_txt' == $wp_query->query_vars['action'] ) {
-			return sprintf( '%s/views/content.php', ADS_TXT_ROOT );
+			header( 'Content-Type: text/plain' );
+			return sprintf(
+				'%s/views/content.php',
+				ADS_TXT_ROOT
+			);
 		}
 
 		return $template;
