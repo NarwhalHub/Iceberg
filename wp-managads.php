@@ -9,12 +9,12 @@
  * Tag: ads, manager, performance
  */
 
-define( 'WP_MANAGADS_PLUGIN_FILE', __FILE__ );
+define('WP_MANAGADS_PLUGIN_FILE', __FILE__);
 
-$composer = sprintf( '%s/vendor/autoload.php', dirname( __FILE__ ) );
+$composer = sprintf('%s/vendor/autoload.php', dirname(__FILE__));
 
-if ( ! file_exists( $composer ) ) {
-	return;
+if (! file_exists($composer)) {
+    return;
 }
 /**
  * Load the plugin core via Composer
@@ -24,6 +24,6 @@ require_once $composer;
 /**
  * Initilize managads features
  */
-if ( class_exists( Managads::class ) ) {
-	$GLOBALS['managads'] = Managads::instance();
+if (class_exists(Managads::class)) {
+    $GLOBALS['managads'] = Managads::instance();
 }

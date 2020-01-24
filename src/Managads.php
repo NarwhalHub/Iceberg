@@ -1,11 +1,14 @@
 <?php
 use Managads\Admin\Admin as ManagadsAdmin;
+use Managads\Component;
 use Managads\Installer as ManagadsInstaller;
-use Managads\Shortcodes\Managads as ManagadsShortcode;
 use Managads\Query as ManagadsQuery;
+use Managads\Shortcodes\Managads as ManagadsShortcode;
 
 class Managads
 {
+    const NAME = 'wp-managads';
+
     protected static $instance;
     public $admin;
 
@@ -38,8 +41,18 @@ class Managads
         }
     }
 
+    private function define($name, $value)
+    {
+        if (defined($name)) {
+            return;
+        }
+        define($name, $value);
+    }
+
     public function defineConstants()
     {
+        $this->define('MANAGAS_ROOT', dirname(WP_MANAGADS_PLUGIN_FILE));
+        $this->define('MANAGAS_COMPONENT_DIR', sprintf('%s/components', MANAGAS_ROOT));
     }
 
     public function includes()
@@ -48,6 +61,12 @@ class Managads
         if ($this->is_request('admin')) {
             $this->admin = new ManagadsAdmin();
         }
+
+        /**
+         * Load the activated Managads components
+         */
+        $component = new Component();
+        $component->loadComponents();
 
         /**
          * Register Shortcodes
