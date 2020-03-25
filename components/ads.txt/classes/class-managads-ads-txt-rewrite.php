@@ -16,7 +16,7 @@ class Managads_Ads_Txt_Rewrite {
 	}
 
 	public function rewrite_rule() {
-		add_rewrite_rule( '^ads\.txt/?$', 'index.php?action=ads_txt', 'top' );
+		add_rewrite_rule( '^ads\.txt$', 'index.php?action=ads_txt', 'top' );
 	}
 
 	public function load_content( $template ) {
